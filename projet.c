@@ -68,6 +68,9 @@ int main() {
     RELATION_afficher(vu);
 
     /* Mettre vos tests ci-dessous */
+    /* OPERATEUR TEST */
+    printf("Operateur tests\n");
+    //OPERATEUR operateur = OP
 
     return 0;
 }
