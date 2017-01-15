@@ -10,7 +10,8 @@
 // CREATION OPERATEURS UNAIRES
 //=======================================================================================
 
-/*Module OPERATEUR_relation_creer
+/*
+ * Module OPERATEUR_relation_creer
  * Paramètre :
  *      RELATION rel - Champ significatif pour une relation (noeud feuille)
  * Retourne : OPERATEUR
@@ -26,7 +27,8 @@ OPERATEUR OPERATEUR_relation_creer(RELATION rel) {
     return operateur;
 }
 
-/*Module OPERATEUR_selection_creer
+/*
+ * Module OPERATEUR_selection_creer
  * Paramètres :
  *    char ** valeurSelection - Valeur de sélection des attributs
  *    int nbAttrProj - Nombre d'atributs projetés
@@ -45,7 +47,8 @@ OPERATEUR OPERATEUR_selection_creer(char **valeurSelection, int nbAttrProj) {
     return operateur;
 }
 
-/*Module OPERATEUR_projection_creer
+/*
+ * Module OPERATEUR_projection_creer
  * Paramètres :
  *    char ** attrProj - Atributs de projection
  *    int nbAttrProj - Nombre d'attributs projetés
@@ -64,7 +67,8 @@ OPERATEUR OPERATEUR_projection_creer(char **attrProj, int nbAttrProj) {
     return operateur;
 }
 
-/*Module OPERATEUR_renommage_creer
+/*
+ * Module OPERATEUR_renommage_creer
  * Paramètres :
  *    char * ancienNom - Ancien nom
  *    char * nvNom - Nouveau nom
@@ -87,7 +91,8 @@ OPERATEUR OPERATEUR_renommage_creer(char *ancienNom, char *nvNom) {
 // CREATION OPERATEURS BINAIRES
 //=======================================================================================
 
-/*Module OPERATEUR_jointure_creer
+/*
+ * Module OPERATEUR_jointure_creer
  * Retourne : OPERATEUR
  * Structure :
  *    op
@@ -99,7 +104,8 @@ OPERATEUR OPERATEUR_jointure_creer() {
     return operateur;
 }
 
-/*Module OPERATEUR_union_creer
+/*
+ * Module OPERATEUR_union_creer
  * Retourne : OPERATEUR
  * Structure :
  *    op
@@ -111,7 +117,8 @@ OPERATEUR OPERATEUR_union_creer() {
     return operateur;
 }
 
-/*Module OPERATEUR_intersection_creer
+/*
+ * Module OPERATEUR_intersection_creer
  * Retourne : OPERATEUR
  * Structure :
  *    op
@@ -123,7 +130,8 @@ OPERATEUR OPERATEUR_intersection_creer() {
     return operateur;
 }
 
-/*Module OPERATEUR_difference_creer
+/*
+ * Module OPERATEUR_difference_creer
  * Retourne : OPERATEUR
  * Structure :
  *    op
@@ -139,8 +147,10 @@ OPERATEUR OPERATEUR_difference_creer() {
 //AFFICHAGE OPERATEUR
 //=======================================================================================
 
-/*Module OPERATEUR_afficher
- * Paramètre : OPERATEUR op - Opérateur a afficher
+/*
+ * Module OPERATEUR_afficher
+ * Paramètre :
+ *      OPERATEUR op - Opérateur a afficher
  * Retourne : void
 */
 void OPERATEUR_afficher(OPERATEUR op) {
@@ -183,4 +193,14 @@ void OPERATEUR_afficher(OPERATEUR op) {
         default:
             break;
     }
+}
+
+/*
+ * Module OPERATEUR_type
+ * Paramètre :
+ *      OPERATEUR op - Opérateur dont le titre est à afficher
+ * Retourne : OPERATEUR_RELATIONNEL
+ */
+OPERATEUR_RELATIONNEL OPERATEUR_type(OPERATEUR op) {
+    return op.op;
 }
