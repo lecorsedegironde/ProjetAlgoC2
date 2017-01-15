@@ -7,16 +7,16 @@
 #include "OPERATEUR.h"
 
 //=======================================================================================
-// OPERATEURS UNAIRES
+// CREATION OPERATEURS UNAIRES
 //=======================================================================================
 
 /*Module OPERATEUR_relation_creer
-Paramètre :
-    RELATION rel - Champ significatif pour une relation (noeud feuille)
-Retourne : OPERATEUR
-Structure :
-    op
-    rel
+ * Paramètre :
+ *      RELATION rel - Champ significatif pour une relation (noeud feuille)
+ * Retourne : OPERATEUR
+ * Structure :
+ *      op
+ *      rel
 */
 OPERATEUR OPERATEUR_relation_creer(RELATION rel) {
     OPERATEUR operateur;
@@ -27,14 +27,14 @@ OPERATEUR OPERATEUR_relation_creer(RELATION rel) {
 }
 
 /*Module OPERATEUR_selection_creer
-Paramètres :
-    char ** valeurSelection - Valeur de sélection des attributs
-    int nbAttrProj - Nombre d'atributs projetés
-Retourne : OPERATEUR
-Structure :
-    op
-    val_sel
-    nb_att_sel
+ * Paramètres :
+ *    char ** valeurSelection - Valeur de sélection des attributs
+ *    int nbAttrProj - Nombre d'atributs projetés
+ * Retourne : OPERATEUR
+ * Structure :
+ *    op
+ *    val_sel
+ *    nb_att_sel
 */
 OPERATEUR OPERATEUR_selection_creer(char **valeurSelection, int nbAttrProj) {
     OPERATEUR operateur;
@@ -46,14 +46,14 @@ OPERATEUR OPERATEUR_selection_creer(char **valeurSelection, int nbAttrProj) {
 }
 
 /*Module OPERATEUR_projection_creer
-Paramètres :
-    char ** attrProj - Atributs de projection
-    int nbAttrProj - Nombre d'attributs projetés
-Retourne : OPERATEUR
-Structure :
-    op
-    att_proj
-    nb_att_proj
+ * Paramètres :
+ *    char ** attrProj - Atributs de projection
+ *    int nbAttrProj - Nombre d'attributs projetés
+ * Retourne : OPERATEUR
+ * Structure :
+ *    op
+ *    att_proj
+ *    nb_att_proj
 */
 OPERATEUR OPERATEUR_projection_creer(char **attrProj, int nbAttrProj) {
     OPERATEUR operateur;
@@ -65,14 +65,14 @@ OPERATEUR OPERATEUR_projection_creer(char **attrProj, int nbAttrProj) {
 }
 
 /*Module OPERATEUR_renommage_creer
-Paramètres :
-    char * ancienNom - Ancien nom
-    char * nvNom - Nouveau nom
-Retourne : OPERATEUR
-Structure :
-    op
-    ancien_nom_ren
-    nouveau_nom_ren
+ * Paramètres :
+ *    char * ancienNom - Ancien nom
+ *    char * nvNom - Nouveau nom
+ * Retourne : OPERATEUR
+ * Structure :
+ *    op
+ *    ancien_nom_ren
+ *    nouveau_nom_ren
 */
 OPERATEUR OPERATEUR_renommage_creer(char *ancienNom, char *nvNom) {
     OPERATEUR operateur;
@@ -84,13 +84,13 @@ OPERATEUR OPERATEUR_renommage_creer(char *ancienNom, char *nvNom) {
 }
 
 //=======================================================================================
-// OPERATEURS BINAIRES
+// CREATION OPERATEURS BINAIRES
 //=======================================================================================
 
 /*Module OPERATEUR_jointure_creer
-Retourne : OPERATEUR
-Structure :
-    op
+ * Retourne : OPERATEUR
+ * Structure :
+ *    op
 */
 OPERATEUR OPERATEUR_jointure_creer() {
     OPERATEUR operateur;
@@ -100,9 +100,9 @@ OPERATEUR OPERATEUR_jointure_creer() {
 }
 
 /*Module OPERATEUR_union_creer
-Retourne : OPERATEUR
-Structure :
-    op
+ * Retourne : OPERATEUR
+ * Structure :
+ *    op
 */
 OPERATEUR OPERATEUR_union_creer() {
     OPERATEUR operateur;
@@ -112,9 +112,9 @@ OPERATEUR OPERATEUR_union_creer() {
 }
 
 /*Module OPERATEUR_intersection_creer
-Retourne : OPERATEUR
-Structure :
-    op
+ * Retourne : OPERATEUR
+ * Structure :
+ *    op
 */
 OPERATEUR OPERATEUR_intersection_creer() {
     OPERATEUR operateur;
@@ -124,13 +124,63 @@ OPERATEUR OPERATEUR_intersection_creer() {
 }
 
 /*Module OPERATEUR_difference_creer
-Retourne : OPERATEUR
-Structure :
-    op
+ * Retourne : OPERATEUR
+ * Structure :
+ *    op
 */
 OPERATEUR OPERATEUR_difference_creer() {
     OPERATEUR operateur;
     operateur.op = op_difference;
 
     return operateur;
+}
+
+//=======================================================================================
+//AFFICHAGE OPERATEUR
+//=======================================================================================
+
+/*Module OPERATEUR_afficher
+ * Paramètre : OPERATEUR op - Opérateur a afficher
+ * Retourne : void
+*/
+void OPERATEUR_afficher(OPERATEUR op) {
+    int i = 0;
+    switch (op.op) {
+        case op_relation:
+            printf("%s", op.rel.nom);
+            break;
+        case op_selection:
+            printf("SELECTION[");
+            for (i = 0; i < op.nb_att_sel; i++) {
+                printf("\"%s\"", op.val_sel[i]);
+                if (i < op.nb_att_sel - 1) printf(",");
+            }
+            printf("]");
+            break;
+        case op_projection:
+            printf("PROJECTION[");
+            for (i = 0; i < op.nb_att_proj; i++) {
+                printf("%s", op.att_proj[i]);
+                if (i < op.nb_att_proj - 1) printf(",");
+            }
+            printf("]");
+            break;
+        case op_renommage:
+            printf("RENOMAGE[%s->%s]", op.ancien_nom_ren, op.nouveau_nom_ren);
+            break;
+        case op_jointure:
+            printf("JOINTURE");
+            break;
+        case op_union:
+            printf("UNION");
+            break;
+        case op_intersection:
+            printf("INTERSECTION");
+            break;
+        case op_difference:
+            printf("DIFFERENCE");
+            break;
+        default:
+            break;
+    }
 }

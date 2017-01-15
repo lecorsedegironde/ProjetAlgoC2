@@ -69,8 +69,54 @@ int main() {
 
     /* Mettre vos tests ci-dessous */
     /* OPERATEUR TEST */
-    printf("Operateur tests\n");
-    //OPERATEUR operateur = OP
+    OPERATEUR operateur;
+    printf("\nOperateur tests\n\n");
+
+    //Operateur Relation
+    printf("Operateur RELATION : \n");
+    operateur = OPERATEUR_relation_creer(film);
+    OPERATEUR_afficher(operateur);
+
+    //Operateur Selection
+    printf("\nOperateur SELECTION : \n");
+    char *selectionTest[] = {"", "Georges Lucas", ""};
+    operateur = OPERATEUR_selection_creer(selectionTest, 3);
+    OPERATEUR_afficher(operateur);
+
+
+    //Operateur Projection
+    printf("\nOperateur PROJECTION : \n");
+    char *projectionTests[] = {"Spectateur", "Titre"};
+    operateur = OPERATEUR_projection_creer(projectionTests, 2);
+    OPERATEUR_afficher(operateur);
+
+    //Operateur Renomage
+    printf("\nOperateur RENOMAGE : \n");
+    char *ancienNomTest = "Cher";
+    char *nouveauNomTest = "Pas cher";
+    operateur = OPERATEUR_renommage_creer(ancienNomTest, nouveauNomTest);
+    OPERATEUR_afficher(operateur);
+
+    //Operateur Jointure
+    printf("\nOperateur JOINTURE : \n");
+    operateur = OPERATEUR_jointure_creer();
+    OPERATEUR_afficher(operateur);
+
+    //Operateur Union
+    printf("\nOperateur UNION : \n");
+    operateur = OPERATEUR_union_creer();
+    OPERATEUR_afficher(operateur);
+
+    //Operateur Intersection
+    printf("\nOperateur INTERSECTION : \n");
+    operateur = OPERATEUR_intersection_creer();
+    OPERATEUR_afficher(operateur);
+
+    //Operateur Difference
+    printf("\nOperateur DIFFERENCE : \n");
+    operateur = OPERATEUR_difference_creer();
+    OPERATEUR_afficher(operateur);
+    printf("\n\nFin Operateurs test\n");
 
     return 0;
 }

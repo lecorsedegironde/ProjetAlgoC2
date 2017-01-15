@@ -2,3 +2,8 @@ language: c
 script: make
 compiler: gcc
 after_success: ./projet
+notifications:
+  email:
+    recipients:
+      - bastien.hoffstetter@free.fr
+    on_success: always
