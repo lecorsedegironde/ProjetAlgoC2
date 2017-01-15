@@ -5,7 +5,7 @@ typedef ARBRE REQUETE;
 
 // Creation de requete 
 // Retourne l'arbre/requete dont la racine a pour valeur un operateur algebrique et pour sous-arbres/requetes des requetes 
-REQUETE REQUETE_creer(OPERATEUR,REQUETE,REQUETE);
+REQUETE REQUETE_creer(OPERATEUR, REQUETE, REQUETE);
 
 // Affichage d'une requete
 // Affichage prefixe des operateurs d'un arbre/requete selon un parcours en profondeur a gauche d'abord (cf. enonce du projet pour des exemples)
@@ -22,4 +22,4 @@ L'evaluation de requete avec verification ci-dessous est la partie la plus diffi
 // Evaluation et verification de requete (difficile)
 // Evaluation recursive de la requete tout en verifiant que la requete est bien formee (cf. ci-dessus)
 // Si le booleen passe par adresse est 'true' alors il y a une erreur (la requete est mal formee), sinon le resultat de l'evaluation est dans la relation passee par adresse
-void REQUETE_verifeval(REQUETE,RELATION*,bool*);
+void REQUETE_verifeval(REQUETE, RELATION *, bool *);

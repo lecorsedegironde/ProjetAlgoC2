@@ -3,46 +3,53 @@
 
 // Type OPERATEUR_RELATIONNEL
 typedef enum op_rel {
-  op_relation,
-  op_selection,
-  op_projection,
-  op_renommage,
-  op_jointure,
-  op_union,
-  op_intersection,
-  op_difference
+    op_relation,
+    op_selection,
+    op_projection,
+    op_renommage,
+    op_jointure,
+    op_union,
+    op_intersection,
+    op_difference
 } OPERATEUR_RELATIONNEL;
 
 // Type OPERATEUR pour les noeuds de REQUETE 
 typedef struct {
-  // type d'operateur
-  OPERATEUR_RELATIONNEL op; // operateur modelise
-  // champ significatif pour une relation (noeud feuille)
-  RELATION rel;
-  // champ significatif pour la selection
-  char * * val_sel; // selection : valeurs de selection des attributs
-  int nb_att_sel; // nombre d'attributs dans la relation ou selectionner
-  // champs significatifs pour la projection
-  char * * att_proj; //attributs de projection
-  int nb_att_proj; // nombre d'attributs projetes
-  // champs significatifs pour le renommage
-  char * ancien_nom_ren;
-  char * nouveau_nom_ren;
+    // type d'operateur
+    OPERATEUR_RELATIONNEL op; // operateur modelise
+    // champ significatif pour une relation (noeud feuille)
+    RELATION rel;
+    // champ significatif pour la selection
+    char **val_sel; // selection : valeurs de selection des attributs
+    int nb_att_sel; // nombre d'attributs dans la relation ou selectionner
+    // champs significatifs pour la projection
+    char **att_proj; //attributs de projection
+    int nb_att_proj; // nombre d'attributs projetes
+    // champs significatifs pour le renommage
+    char *ancien_nom_ren;
+    char *nouveau_nom_ren;
 } OPERATEUR;
 
 // Fonctions de creation d'operateur : chaque fonction prend en entree les valeurs des champs significatifs pour l'operateur cree 
 // Le champ significatif est : rel
 OPERATEUR OPERATEUR_relation_creer(RELATION);
-// Les champs significatifs sont : val_sel, nb_att_sel 
-OPERATEUR OPERATEUR_selection_creer(char**,int);
-// Les champs significatifs sont : att_proj, nb_att_proj 
-OPERATEUR OPERATEUR_projection_creer(char**,int);
-// Les champs significatifs sont : ancien_nom_ren, nouveau_nom_ren 
-OPERATEUR OPERATEUR_renommage_creer(char*,char*);
+
+// Les champs significatifs sont : val_sel, nb_att_sel
+OPERATEUR OPERATEUR_selection_creer(char **, int);
+
+// Les champs significatifs sont : att_proj, nb_att_proj
+OPERATEUR OPERATEUR_projection_creer(char **, int);
+
+// Les champs significatifs sont : ancien_nom_ren, nouveau_nom_ren
+OPERATEUR OPERATEUR_renommage_creer(char *, char *);
+
 // Pas de champ significatif pour les operateurs binaires
 OPERATEUR OPERATEUR_jointure_creer();
+
 OPERATEUR OPERATEUR_union_creer();
+
 OPERATEUR OPERATEUR_intersection_creer();
+
 OPERATEUR OPERATEUR_difference_creer();
 
 // Fonction d'affichage des operateurs
@@ -65,10 +72,12 @@ OPERATEUR_RELATIONNEL OPERATEUR_type(OPERATEUR);
 // Fonction d'evaluation des operateurs
 // L'evaluation d'un operateur relation est la relation qui y est stockee
 RELATION OPERATEUR_relation_evaluer(OPERATEUR);
-// L'evaluation d'un operateur unaire (selection, projection et renommage) est le resultat de l'application de cet operateur a une relation 
-RELATION OPERATEUR_unaire_evaluer(OPERATEUR,RELATION);
+
+// L'evaluation d'un operateur unaire (selection, projection et renommage) est le resultat de l'application de cet operateur a une relation
+RELATION OPERATEUR_unaire_evaluer(OPERATEUR, RELATION);
+
 // L'evaluation d'un operateur binaire (jointure, union, intersection et difference) est le resultat de l'application de cet operateur a deux relations
-RELATION OPERATEUR_binaire_evaluer(OPERATEUR,RELATION,RELATION);
+RELATION OPERATEUR_binaire_evaluer(OPERATEUR, RELATION, RELATION);
 
 /*
 Les fonctions ci-dessous ne sont necessaires qu'a l'evaluation de requete avec verification que la requete est bien formee. 
@@ -83,6 +92,7 @@ C'est la partie la plus difficile du projet, donc a faire quand tout le reste fo
    - l'attribut a renommer doit etre un attribut de la relation et le nom de renommage ne doit pas deja être un nom d'attribut de la relation
    - les relations dont on veut l'union, l'intersection ou la difference doivent etre de meme schema 
 */
-bool OPERATEUR_unaire_valider(OPERATEUR,RELATION);
-bool OPERATEUR_binaire_valider(OPERATEUR,RELATION,RELATION);
+bool OPERATEUR_unaire_valider(OPERATEUR, RELATION);
+
+bool OPERATEUR_binaire_valider(OPERATEUR, RELATION, RELATION);
 
