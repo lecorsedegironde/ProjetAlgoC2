@@ -204,3 +204,37 @@ void OPERATEUR_afficher(OPERATEUR op) {
 OPERATEUR_RELATIONNEL OPERATEUR_type(OPERATEUR op) {
     return op.op;
 }
+
+/*
+ * Module OPERATEUR_relation_evaluer
+ * Paramètre :
+ *      OPERATEUR op : Opérateur de relation qui est à évaluer
+ * Retourne : RELATION
+ */
+RELATION OPERATEUR_relation_evaluer(OPERATEUR op) {
+    return op.rel;
+}
+
+/*
+ * Module OPERATEUR_unaire_evaluer
+ * Opérateurs unaires : selection, projection et renommage
+ * Paramètres :
+ *      OPERATEUR op : Opérateur unaire à évaluer
+ *      RELATION rel : Relation sur laquelle on applique l'opérateur
+ * Retourne : RELATION
+ *
+ */
+RELATION OPERATEUR_unaire_evaluer(OPERATEUR op, RELATION rel) {
+    switch (op.op) {
+        case op_selection:
+            return RELATION_SELECTION(rel, op.val_sel);
+        case op_projection:
+            return RELATION_PROJECTION(rel, op.att_proj, op.nb_att_proj);
+        case op_renommage:
+            return RELATION_RENOMMAGE(rel, op.ancien_nom_ren, op.nouveau_nom_ren);
+        default:
+            //Temporary workaround to avoid compilation warning
+            //TODO: Change when needed
+            return rel;
+    }
+}
