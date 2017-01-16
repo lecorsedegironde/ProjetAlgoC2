@@ -170,7 +170,30 @@ int main() {
     OPERATEUR_afficher(operateur);
     printf("\n");
     RELATION_afficher(OPERATEUR_binaire_evaluer(operateur, vu, aime));
+    printf("\n\nFin Evaluation test\n");
 
+    /* TEST REQUETE */
+    printf("\nRequete tests\n");
+
+    //Creation d'une requête
+    //Création des opérateurs :
+    OPERATEUR opVu = OPERATEUR_relation_creer(vu);
+    OPERATEUR opFilm = OPERATEUR_relation_creer(film);
+    OPERATEUR opJointure = OPERATEUR_jointure_creer();
+    char *selectionReqTests[] = {"", "Georges Lucas", "", ""};
+    OPERATEUR opSelection = OPERATEUR_selection_creer(selectionReqTests, 4);
+    char *projectionReqTests[] = {"Spectateur", "Titre"};
+    OPERATEUR opProjection = OPERATEUR_projection_creer(projectionReqTests, 2);
+    REQUETE requete = REQUETE_creer(opProjection,
+                                    REQUETE_creer(opSelection,
+                                                  REQUETE_creer(opJointure,
+                                                                REQUETE_creer(opFilm, NULL, NULL),
+                                                                REQUETE_creer(opVu, NULL, NULL)
+                                                  ), NULL),
+                                    NULL);
+    REQUETE_afficher(requete);
+
+    printf("\n");
 
     return 0;
 }
