@@ -171,5 +171,6 @@ int main() {
     printf("\n");
     RELATION_afficher(OPERATEUR_binaire_evaluer(operateur, vu, aime));
 
+
     return 0;
 }
