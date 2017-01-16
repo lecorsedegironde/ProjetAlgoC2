@@ -1,5 +1,5 @@
-// Etudiant :
-// Enseignant :
+// Etudiant : Bastien Hoffstetter
+// Enseignant : François Goasdoue
 
 #include <stdio.h>
 #include "REQUETE.h"
@@ -68,12 +68,12 @@ int main() {
     RELATION_afficher(vu);
 
     /* Mettre vos tests ci-dessous */
-    /* OPERATEUR TEST */
+    /* TEST OPERATEUR*/
     OPERATEUR operateur;
-    printf("\nOperateur tests\n\n");
+    printf("\nOperateur tests\n");
 
     //Operateur Relation
-    printf("Operateur RELATION : \n");
+    printf("\nOperateur RELATION : \n");
     operateur = OPERATEUR_relation_creer(film);
     OPERATEUR_afficher(operateur);
 
@@ -86,14 +86,14 @@ int main() {
 
     //Operateur Projection
     printf("\nOperateur PROJECTION : \n");
-    char *projectionTests[] = {"Spectateur", "Titre"};
+    char *projectionTests[] = {"Titre", "Acteur"};
     operateur = OPERATEUR_projection_creer(projectionTests, 2);
     OPERATEUR_afficher(operateur);
 
     //Operateur Renomage
     printf("\nOperateur RENOMAGE : \n");
-    char *ancienNomTest = "Cher";
-    char *nouveauNomTest = "Pas cher";
+    char *ancienNomTest = "Spectateur";
+    char *nouveauNomTest = "Client";
     operateur = OPERATEUR_renommage_creer(ancienNomTest, nouveauNomTest);
     OPERATEUR_afficher(operateur);
 
@@ -117,6 +117,59 @@ int main() {
     operateur = OPERATEUR_difference_creer();
     OPERATEUR_afficher(operateur);
     printf("\n\nFin Operateurs test\n");
+
+    /* TEST EVALUATION */
+    printf("\nEvaluation tests\n");
+
+    //Evaluation OPERATEURS UNAIRES :
+    printf("\nEvaluation Operateur RELATION : \n");
+    operateur = OPERATEUR_relation_creer(film);
+    OPERATEUR_afficher(operateur);
+    printf("\n");
+    RELATION_afficher(OPERATEUR_relation_evaluer(operateur));
+
+    printf("\nEvaluation Operateur SELECTION : \n");
+    operateur = OPERATEUR_selection_creer(selectionTest, 3);
+    OPERATEUR_afficher(operateur);
+    printf("\n");
+    RELATION_afficher(OPERATEUR_unaire_evaluer(operateur, film));
+
+    printf("\nEvaluation Operateur PROJECTION : \n");
+    operateur = OPERATEUR_projection_creer(projectionTests, 2);
+    OPERATEUR_afficher(operateur);
+    printf("\n");
+    RELATION_afficher(OPERATEUR_unaire_evaluer(operateur, film));
+
+    printf("\nEvaluation Operateur RENOMMAGE : \n");
+    operateur = OPERATEUR_renommage_creer(ancienNomTest, nouveauNomTest);
+    OPERATEUR_afficher(operateur);
+    printf("\n");
+    RELATION_afficher(OPERATEUR_unaire_evaluer(operateur, aime));
+
+    //Evaluation OPERATEURS BINAIRES :
+    printf("\nEvaluation Operateur JOINTURE : \n");
+    operateur = OPERATEUR_jointure_creer();
+    OPERATEUR_afficher(operateur);
+    printf("\n");
+    RELATION_afficher(OPERATEUR_binaire_evaluer(operateur, film, vu));
+
+    printf("\nEvaluation Operateur UNION : \n");
+    operateur = OPERATEUR_union_creer();
+    OPERATEUR_afficher(operateur);
+    printf("\n");
+    RELATION_afficher(OPERATEUR_binaire_evaluer(operateur, vu, film));
+
+    printf("\nEvaluation Operateur INTERSECTION : \n");
+    operateur = OPERATEUR_intersection_creer();
+    OPERATEUR_afficher(operateur);
+    printf("\n");
+    RELATION_afficher(OPERATEUR_binaire_evaluer(operateur, vu, film));
+
+    printf("\nEvaluation Operateur DIFFERENCE : \n");
+    operateur = OPERATEUR_difference_creer();
+    OPERATEUR_afficher(operateur);
+    printf("\n");
+    RELATION_afficher(OPERATEUR_binaire_evaluer(operateur, vu, aime));
 
     return 0;
 }
