@@ -1,5 +1,5 @@
-// Etudiant :
-// Enseignant :
+// Etudiant : Bastien Hoffstetter
+// Enseignant : François Goasdoue
 
 #include <stdio.h>
 #include "REQUETE.h"
