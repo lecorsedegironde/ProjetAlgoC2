@@ -146,5 +146,30 @@ int main() {
     printf("\n");
     RELATION_afficher(OPERATEUR_unaire_evaluer(operateur, aime));
 
+    //Evaluation OPERATEURS BINAIRES :
+    printf("\nEvaluation Operateur JOINTURE : \n");
+    operateur = OPERATEUR_jointure_creer();
+    OPERATEUR_afficher(operateur);
+    printf("\n");
+    RELATION_afficher(OPERATEUR_binaire_evaluer(operateur, film, vu));
+
+    printf("\nEvaluation Operateur UNION : \n");
+    operateur = OPERATEUR_union_creer();
+    OPERATEUR_afficher(operateur);
+    printf("\n");
+    RELATION_afficher(OPERATEUR_binaire_evaluer(operateur, vu, film));
+
+    printf("\nEvaluation Operateur INTERSECTION : \n");
+    operateur = OPERATEUR_intersection_creer();
+    OPERATEUR_afficher(operateur);
+    printf("\n");
+    RELATION_afficher(OPERATEUR_binaire_evaluer(operateur, vu, film));
+
+    printf("\nEvaluation Operateur DIFFERENCE : \n");
+    operateur = OPERATEUR_difference_creer();
+    OPERATEUR_afficher(operateur);
+    printf("\n");
+    RELATION_afficher(OPERATEUR_binaire_evaluer(operateur, vu, aime));
+
     return 0;
 }

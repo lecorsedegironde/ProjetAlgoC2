@@ -238,3 +238,31 @@ RELATION OPERATEUR_unaire_evaluer(OPERATEUR op, RELATION rel) {
             return rel;
     }
 }
+
+/*
+ * Module OPERATEUR_binaire_evaluer
+ * Opérateurs binaires : jointure, union, intersection et difference
+ * Paramètres :
+ *      OPERATEUR op : Opérateur unaire à évaluer
+ *      RELATION rel1, rel2 : Relations sur lesquelles on applique l'opérateur
+ * Retourne : RELATION
+ *
+ */
+RELATION OPERATEUR_binaire_evaluer(OPERATEUR op, RELATION rel1, RELATION rel2) {
+    switch (op.op) {
+
+        case op_jointure:
+            return RELATION_JOINTURE(rel1, rel2);
+        case op_union:
+            return RELATION_UNION(rel1, rel2);
+        case op_intersection:
+            return RELATION_INTERSECTION(rel1, rel2);
+        case op_difference:
+            return RELATION_DIFFERENCE(rel1, rel2);
+        default:
+            //Temporary workaround to avoid compilation warning
+            //TODO: Change when needed
+            return rel1;
+    }
+}
+
