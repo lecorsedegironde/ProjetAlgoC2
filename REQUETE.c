@@ -14,3 +14,4 @@
 REQUETE REQUETE_creer(OPERATEUR op, REQUETE reqGauche, REQUETE reqDroite) {
     return ARBRE_creer(op, reqGauche, reqDroite);
 }
+
