@@ -39,3 +39,25 @@ void REQUETE_afficher(REQUETE req) {
         printf(")");
     }
 }
+
+/*
+ * Module REQUETE_evaluer
+ * Paramètres :
+ *      REQUETE req : Requête à évaluer
+ * Retourne : RELATION
+ */
+RELATION REQUETE_evaluer(REQUETE req) {
+    //On teste si il existe un fils gauche
+    if (req->g != NULL) {
+        //Si il y a un fils droit, c'est un opérateur binaire
+        if (req->d != NULL) {
+            return OPERATEUR_binaire_evaluer(req->val, REQUETE_evaluer(req->g), REQUETE_evaluer(req->d));
+        } else {
+            //Sinon c'est un opérateur unaire
+            return OPERATEUR_unaire_evaluer(req->val, REQUETE_evaluer(req->g));
+        }
+    } else {
+        //Il n'y a pas de fils gauche donc la requête porte sur une relation
+        return OPERATEUR_relation_evaluer(req->val);
+    }
+}

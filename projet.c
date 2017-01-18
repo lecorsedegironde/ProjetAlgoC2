@@ -192,6 +192,8 @@ int main() {
                                                   ), NULL),
                                     NULL);
     REQUETE_afficher(requete);
+    printf("\nÉvaluation : \n");
+    RELATION_afficher(REQUETE_evaluer(requete));
 
     printf("\n");
 
