@@ -18,7 +18,8 @@
  * Structure :
  *      op
  *      rel
-*/
+ *
+ */
 OPERATEUR OPERATEUR_relation_creer(RELATION rel) {
     OPERATEUR operateur;
     operateur.op = op_relation;
@@ -37,7 +38,8 @@ OPERATEUR OPERATEUR_relation_creer(RELATION rel) {
  *    op
  *    val_sel
  *    nb_att_sel
-*/
+ *
+ */
 OPERATEUR OPERATEUR_selection_creer(char **valeurSelection, int nbAttrProj) {
     OPERATEUR operateur;
     operateur.op = op_selection;
@@ -57,7 +59,8 @@ OPERATEUR OPERATEUR_selection_creer(char **valeurSelection, int nbAttrProj) {
  *    op
  *    att_proj
  *    nb_att_proj
-*/
+ *
+ */
 OPERATEUR OPERATEUR_projection_creer(char **attrProj, int nbAttrProj) {
     OPERATEUR operateur;
     operateur.op = op_projection;
@@ -77,7 +80,8 @@ OPERATEUR OPERATEUR_projection_creer(char **attrProj, int nbAttrProj) {
  *    op
  *    ancien_nom_ren
  *    nouveau_nom_ren
-*/
+ *
+ */
 OPERATEUR OPERATEUR_renommage_creer(char *ancienNom, char *nvNom) {
     OPERATEUR operateur;
     operateur.op = op_renommage;
@@ -96,7 +100,8 @@ OPERATEUR OPERATEUR_renommage_creer(char *ancienNom, char *nvNom) {
  * Retourne : OPERATEUR
  * Structure :
  *    op
-*/
+ *
+ */
 OPERATEUR OPERATEUR_jointure_creer() {
     OPERATEUR operateur;
     operateur.op = op_jointure;
@@ -109,7 +114,8 @@ OPERATEUR OPERATEUR_jointure_creer() {
  * Retourne : OPERATEUR
  * Structure :
  *    op
-*/
+ *
+ */
 OPERATEUR OPERATEUR_union_creer() {
     OPERATEUR operateur;
     operateur.op = op_union;
@@ -122,7 +128,8 @@ OPERATEUR OPERATEUR_union_creer() {
  * Retourne : OPERATEUR
  * Structure :
  *    op
-*/
+ *
+ */
 OPERATEUR OPERATEUR_intersection_creer() {
     OPERATEUR operateur;
     operateur.op = op_intersection;
@@ -135,7 +142,8 @@ OPERATEUR OPERATEUR_intersection_creer() {
  * Retourne : OPERATEUR
  * Structure :
  *    op
-*/
+ *
+ */
 OPERATEUR OPERATEUR_difference_creer() {
     OPERATEUR operateur;
     operateur.op = op_difference;
@@ -152,7 +160,8 @@ OPERATEUR OPERATEUR_difference_creer() {
  * Paramètre :
  *      OPERATEUR op - Opérateur a afficher
  * Retourne : void
-*/
+ *
+ */
 void OPERATEUR_afficher(OPERATEUR op) {
     int i = 0;
     switch (op.op) {
@@ -200,6 +209,7 @@ void OPERATEUR_afficher(OPERATEUR op) {
  * Paramètre :
  *      OPERATEUR op - Opérateur dont le titre est à afficher
  * Retourne : OPERATEUR_RELATIONNEL
+ *
  */
 OPERATEUR_RELATIONNEL OPERATEUR_type(OPERATEUR op) {
     return op.op;
@@ -210,6 +220,7 @@ OPERATEUR_RELATIONNEL OPERATEUR_type(OPERATEUR op) {
  * Paramètre :
  *      OPERATEUR op : Opérateur de relation qui est à évaluer
  * Retourne : RELATION
+ *
  */
 RELATION OPERATEUR_relation_evaluer(OPERATEUR op) {
     return op.rel;
