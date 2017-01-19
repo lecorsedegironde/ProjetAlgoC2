@@ -22,7 +22,6 @@ REQUETE REQUETE_creer(OPERATEUR op, REQUETE reqGauche, REQUETE reqDroite) {
  * Retourne : void
  */
 void REQUETE_afficher(REQUETE req) {
-
     //Affichage de l'opérateur de la requête
     ELT_afficher(req->val);
 

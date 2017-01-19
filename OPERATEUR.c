@@ -277,3 +277,60 @@ RELATION OPERATEUR_binaire_evaluer(OPERATEUR op, RELATION rel1, RELATION rel2) {
     }
 }
 
+/*
+ * Module OPERATEUR_unaire_valider
+ * Paramètres :
+ *      OPERATEUR op : Opéarateur unaire à valider
+ *      RELATION rel : La relation sur laquelle l'opérateur est censée s'appliquer
+ */
+bool OPERATEUR_unaire_valider(OPERATEUR op, RELATION rel) {
+    //Switch case sur les opérateurs unaires
+    //Pas besoin de test pour relation
+
+    //Booleen retour, par défaut on estime l'opérateur valide
+    bool retourValidation = true;
+    //Booleen pour la validation de la projection
+    bool projection = true;
+
+    //Création d'itérateurs
+    int i = 0, j = 0;
+
+    switch (op.op) {
+        case op_selection:
+            //la taille d'un tuple de selection doit etre egale au nombre de colonnes de la relation
+            if (op.nb_att_sel != rel.colonnes) retourValidation = false;
+            break;
+        case op_projection:
+            //les attributs de projection doivent etre des attributs de la relation
+            if (op.nb_att_proj <= rel.colonnes) {
+                //Il y a le bon nombre de colonnes, on peut vérifier la concordance des attributs
+                //Récupération du shéma de la relation et de son arite
+                char **relationAttr = RELATION_schema(rel);
+                int relationArite = RELATION_arite(rel);
+                i = op.nb_att_proj - 1;
+                while (i-- && retourValidation) {
+                    //Pour chaque attribut de projection, on regarde si il existe dans le shéma de la relation
+                    j = relationArite - 1;
+                    while (j-- && retourValidation) {
+                        if (!op.att_proj[i] == relationAttr[j]) {
+
+                        }
+                    }
+                }
+            } else {
+                //Il y a plus d'attributs pour la projection que d'attributs dans la relation
+                retourValidation = false;
+            }
+            break;
+        case op_renommage:
+            //l'attribut a renommer doit etre un attribut de la relation et le nom de renommage ne doit pas deja être un nom d'attribut de la relation
+
+            break;
+        default:
+            //Si défaut : pas normal et on retourne false
+            retourValidation = false;
+            break;
+    }
+
+    return retourValidation;
+}

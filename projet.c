@@ -97,6 +97,7 @@ int main() {
     operateur = OPERATEUR_renommage_creer(ancienNomTest, nouveauNomTest);
     OPERATEUR_afficher(operateur);
 
+
     //Operateur Jointure
     printf("\nOperateur JOINTURE : \n");
     operateur = OPERATEUR_jointure_creer();
@@ -196,6 +197,27 @@ int main() {
     RELATION_afficher(REQUETE_evaluer(requete));
 
     printf("\n");
+
+    /* TEST VALIDATION */
+    printf("\nValidation tests");
+
+    //Opérateur relation :
+    printf("\nValidation Relation : ");
+    operateur = OPERATEUR_relation_creer(film);
+    printf("\nRésultat 1 : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+
+    //Opérateur sélection :
+    printf("\nValidation Sélection : ");
+    operateur = OPERATEUR_selection_creer(selectionTest, 3);
+    printf("\nRésultat 2a : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+    operateur = OPERATEUR_selection_creer(selectionReqTests, 4);
+    printf("\nRésultat 2b : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+
+    //Opérateur projection :
+    printf("\nValidation Projection : ");
+    operateur = OPERATEUR_projection_creer(projectionTests, 2);
+    printf("\nRésultat 3a : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+    printf("\nRésultat 3b : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
 
     return 0;
 }
