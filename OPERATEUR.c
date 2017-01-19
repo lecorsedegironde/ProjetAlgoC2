@@ -290,7 +290,7 @@ bool OPERATEUR_unaire_valider(OPERATEUR op, RELATION rel) {
     //Booleen retour, par défaut on estime l'opérateur valide
     bool retourValidation = true;
     //Booleen pour la validation de la projection
-    bool projection = true;
+    bool projection = false;
 
     //Création d'itérateurs
     int i = 0, j = 0;
@@ -307,15 +307,21 @@ bool OPERATEUR_unaire_valider(OPERATEUR op, RELATION rel) {
                 //Récupération du shéma de la relation et de son arite
                 char **relationAttr = RELATION_schema(rel);
                 int relationArite = RELATION_arite(rel);
-                i = op.nb_att_proj - 1;
-                while (i-- && retourValidation) {
+                i = op.nb_att_proj;
+                while (i--) {
                     //Pour chaque attribut de projection, on regarde si il existe dans le shéma de la relation
-                    j = relationArite - 1;
-                    while (j-- && retourValidation) {
-                        if (!op.att_proj[i] == relationAttr[j]) {
-
+                    j = relationArite;
+                    while (j--) {
+                        //Si il y a concordance entre les deux noms on quitte cette boucle
+                        if (!strcmp(op.att_proj[i],relationAttr[j])) {
+                            projection = true;
+                            j = 0;
+                        } else {
+                            projection = false;
                         }
                     }
+                    //Si aucunne concordance n'a été trouvée, l'opérateur n'est pas valide
+                    if (!projection) retourValidation = false;
                 }
             } else {
                 //Il y a plus d'attributs pour la projection que d'attributs dans la relation

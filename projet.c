@@ -215,9 +215,17 @@ int main() {
 
     //Opérateur projection :
     printf("\nValidation Projection : ");
+    //projectionTests : Titre, Acteur
     operateur = OPERATEUR_projection_creer(projectionTests, 2);
     printf("\nRésultat 3a : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
     printf("\nRésultat 3b : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
+    printf("\nRésultat 3c : %s", (OPERATEUR_unaire_valider(operateur, aime) ? "true" : "false"));
+    char *test[] = {"Spectateur"};
+    operateur = OPERATEUR_projection_creer(test, 1);
+    printf("\nRésultat 3c : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
+
+
+
 
     return 0;
 }
