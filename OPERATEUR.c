@@ -381,10 +381,10 @@ bool OPERATEUR_binaire_valider(OPERATEUR op, RELATION rel1, RELATION rel2) {
 
         if (relation1Arite == relation2Arite) {
             while (relation1Arite-- && retourValidation) {
-                while (relation2Arite-- && retourValidation) {
-                    retourValidation = !strcmp(relation1Attr[relation1Arite], relation2Attr[relation2Arite]);
-                }
+                    retourValidation = !strcmp(relation1Attr[relation1Arite], relation2Attr[relation1Arite]);
             }
+        } else {
+            retourValidation = false;
         }
     } else retourValidation = false;    //Opérateur unaire ou jointure
 
