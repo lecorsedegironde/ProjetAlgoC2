@@ -282,6 +282,8 @@ RELATION OPERATEUR_binaire_evaluer(OPERATEUR op, RELATION rel1, RELATION rel2) {
  * Paramètres :
  *      OPERATEUR op : Opéarateur unaire à valider
  *      RELATION rel : La relation sur laquelle l'opérateur est censé s'appliquer
+ * Retourne : bool
+ *
  */
 bool OPERATEUR_unaire_valider(OPERATEUR op, RELATION rel) {
     //Switch case sur les opérateurs unaires
@@ -366,6 +368,8 @@ bool OPERATEUR_unaire_valider(OPERATEUR op, RELATION rel) {
  * Paramètres :
  *      OPERATEUR op : Opéarateur unaire à valider
  *      RELATION rel1, rel2 : Les relations sur lesquelle l'opérateur est censé s'appliquer
+ * Retourne : bool
+ *
  */
 bool OPERATEUR_binaire_valider(OPERATEUR op, RELATION rel1, RELATION rel2) {
     //les relations dont on veut l'union, l'intersection ou la difference doivent etre de meme schema
@@ -381,12 +385,14 @@ bool OPERATEUR_binaire_valider(OPERATEUR op, RELATION rel1, RELATION rel2) {
 
         if (relation1Arite == relation2Arite) {
             while (relation1Arite-- && retourValidation) {
-                    retourValidation = !strcmp(relation1Attr[relation1Arite], relation2Attr[relation1Arite]);
+                retourValidation = !strcmp(relation1Attr[relation1Arite], relation2Attr[relation1Arite]);
             }
         } else {
             retourValidation = false;
         }
-    } else retourValidation = false;    //Opérateur unaire ou jointure
+    } else if (op.op != op_jointure) {
+        retourValidation = false;    //Opérateur unaire ou jointure
+    }
 
     return retourValidation;
 }

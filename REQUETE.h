@@ -12,7 +12,11 @@ REQUETE REQUETE_creer(OPERATEUR, REQUETE, REQUETE);
 void REQUETE_afficher(REQUETE);
 
 // Evaluation simple de requete (facile)
-// Evaluation recursive de la requete, en supposant que la requete est bien formee (les relations sont aux feuilles, les noeuds avec un seul fils ont ce fils situe a gauche et codent des operateurs unaires verifiant les conditions pour leur application aux résultats de leur sous-requete de sous-arbre gauche, les noeuds avec deux fils codent des operateurs binaires verifiant les conditions pour leur application aux resultats de leurs sous-requetes des sous-arbres gauche et droit) [les conditions des operateurs sont donnees dans OPERATEURS.h et a coder dans OPERATEUR.c]
+// Evaluation recursive de la requete, en supposant que la requete est bien formee (les relations sont aux feuilles,
+// les noeuds avec un seul fils ont ce fils situe a gauche et codent des operateurs unaires verifiant les conditions
+// pour leur application aux résultats de leur sous-requete de sous-arbre gauche, les noeuds avec deux fils
+// codent des operateurs binaires verifiant les conditions pour leur application aux resultats de leurs sous-requetes des
+// sous-arbres gauche et droit) [les conditions des operateurs sont donnees dans OPERATEURS.h et a coder dans OPERATEUR.c]
 RELATION REQUETE_evaluer(REQUETE);
 
 /*
