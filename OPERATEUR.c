@@ -335,7 +335,12 @@ bool OPERATEUR_unaire_valider(OPERATEUR op, RELATION rel) {
             //On parcours le schéma de la relation pour vérifier l'éxistence de l'attribut à renommer
             i = relationArite;
             while (i--) {
-                (!strcmp(op.ancien_nom_ren, relationAttr[i])) ? (i = 0) : (retourValidation = false);
+                if (!strcmp(op.ancien_nom_ren, relationAttr[i])) {
+                    retourValidation = true;
+                    i = 0;
+                } else {
+                    retourValidation = false;
+                }
             }
             //Si il a bien été trouvé, on vérifie que l'autre attribut existe pas déjà
             i = relationArite;  //Remise à 0 de l'itérateur

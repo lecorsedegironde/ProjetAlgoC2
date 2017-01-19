@@ -229,10 +229,8 @@ int main() {
     operateur = OPERATEUR_renommage_creer(ancienNomTest, nouveauNomTest);
     printf("\nRésultat 4a : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
     printf("\nRésultat 4b : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
-    printf("\nRésultat 4c : %s", (OPERATEUR_unaire_valider(operateur, (OPERATEUR_unaire_evaluer(operateur, vu))) ? "true" : "false"));
-
-
-
+    printf("\nRésultat 4c : %s",
+           (OPERATEUR_unaire_valider(operateur, (OPERATEUR_unaire_evaluer(operateur, vu))) ? "true" : "false"));
 
 
     return 0;
