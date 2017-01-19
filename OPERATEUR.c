@@ -281,7 +281,7 @@ RELATION OPERATEUR_binaire_evaluer(OPERATEUR op, RELATION rel1, RELATION rel2) {
  * Module OPERATEUR_unaire_valider
  * Paramètres :
  *      OPERATEUR op : Opéarateur unaire à valider
- *      RELATION rel : La relation sur laquelle l'opérateur est censée s'appliquer
+ *      RELATION rel : La relation sur laquelle l'opérateur est censé s'appliquer
  */
 bool OPERATEUR_unaire_valider(OPERATEUR op, RELATION rel) {
     //Switch case sur les opérateurs unaires
@@ -292,7 +292,7 @@ bool OPERATEUR_unaire_valider(OPERATEUR op, RELATION rel) {
     //Booleen pour la validation de la projection
     bool projection = false;
 
-    //Récupération du shéma de la relation et de son arite
+    //Récupération du schéma de la relation et de son arite
     char **relationAttr = RELATION_schema(rel);
     int relationArite = RELATION_arite(rel);
 
@@ -359,3 +359,35 @@ bool OPERATEUR_unaire_valider(OPERATEUR op, RELATION rel) {
 
     return retourValidation;
 }
+
+
+/*
+ * Module OPERATEUR_binaire_valider
+ * Paramètres :
+ *      OPERATEUR op : Opéarateur unaire à valider
+ *      RELATION rel1, rel2 : Les relations sur lesquelle l'opérateur est censé s'appliquer
+ */
+bool OPERATEUR_binaire_valider(OPERATEUR op, RELATION rel1, RELATION rel2) {
+    //les relations dont on veut l'union, l'intersection ou la difference doivent etre de meme schema
+    //Booleen de retour, ici aussi on part du postulat que l'opérateur est vrai
+    bool retourValidation = true;
+    if (op.op == op_union || op.op == op_intersection || op.op == op_difference) {
+
+        //Récupération des schémas de la relation et de son arite
+        char **relation1Attr = RELATION_schema(rel1);
+        int relation1Arite = RELATION_arite(rel1);
+        char **relation2Attr = RELATION_schema(rel2);
+        int relation2Arite = RELATION_arite(rel2);
+
+        if (relation1Arite == relation2Arite) {
+            while (relation1Arite-- && retourValidation) {
+                while (relation2Arite-- && retourValidation) {
+                    retourValidation = !strcmp(relation1Attr[relation1Arite], relation2Attr[relation2Arite]);
+                }
+            }
+        }
+    } else retourValidation = false;    //Opérateur unaire ou jointure
+
+    return retourValidation;
+}
+

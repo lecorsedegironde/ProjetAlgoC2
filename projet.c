@@ -232,6 +232,18 @@ int main() {
     printf("\nRésultat 4c : %s",
            (OPERATEUR_unaire_valider(operateur, (OPERATEUR_unaire_evaluer(operateur, vu))) ? "true" : "false"));
 
+    //Opérateurs binaires
+    printf("\nValidation Opérateurs binaires : ");
+    operateur = OPERATEUR_union_creer();
+    printf("\nRésultat 5a : %s", (OPERATEUR_binaire_valider(operateur, vu, aime) ? "true" : "false"));
+    printf("\nRésultat 5b : %s", (OPERATEUR_binaire_valider(operateur, film, vu) ? "true" : "false"));
+    operateur = OPERATEUR_intersection_creer();
+    printf("\nRésultat 5c : %s", (OPERATEUR_binaire_valider(operateur, vu, aime) ? "true" : "false"));
+    operateur = OPERATEUR_difference_creer();
+    printf("\nRésultat 5d : %s", (OPERATEUR_binaire_valider(operateur, vu, aime) ? "true" : "false"));
+
+
+
 
     return 0;
 }
