@@ -292,6 +292,10 @@ bool OPERATEUR_unaire_valider(OPERATEUR op, RELATION rel) {
     //Booleen pour la validation de la projection
     bool projection = false;
 
+    //Récupération du shéma de la relation et de son arite
+    char **relationAttr = RELATION_schema(rel);
+    int relationArite = RELATION_arite(rel);
+
     //Création d'itérateurs
     int i = 0, j = 0;
 
@@ -304,16 +308,13 @@ bool OPERATEUR_unaire_valider(OPERATEUR op, RELATION rel) {
             //les attributs de projection doivent etre des attributs de la relation
             if (op.nb_att_proj <= rel.colonnes) {
                 //Il y a le bon nombre de colonnes, on peut vérifier la concordance des attributs
-                //Récupération du shéma de la relation et de son arite
-                char **relationAttr = RELATION_schema(rel);
-                int relationArite = RELATION_arite(rel);
                 i = op.nb_att_proj;
                 while (i--) {
                     //Pour chaque attribut de projection, on regarde si il existe dans le shéma de la relation
                     j = relationArite;
                     while (j--) {
                         //Si il y a concordance entre les deux noms on quitte cette boucle
-                        if (!strcmp(op.att_proj[i],relationAttr[j])) {
+                        if (!strcmp(op.att_proj[i], relationAttr[j])) {
                             projection = true;
                             j = 0;
                         } else {
@@ -329,7 +330,20 @@ bool OPERATEUR_unaire_valider(OPERATEUR op, RELATION rel) {
             }
             break;
         case op_renommage:
-            //l'attribut a renommer doit etre un attribut de la relation et le nom de renommage ne doit pas deja être un nom d'attribut de la relation
+            //l'attribut a renommer doit etre un attribut de la relation et le nom de renommage ne doit
+            // pas deja être un nom d'attribut de la relation
+            //On parcours le schéma de la relation pour vérifier l'éxistence de l'attribut à renommer
+            i = relationArite;
+            while (i--) {
+                (!strcmp(op.ancien_nom_ren, relationAttr[i])) ? (i = 0) : (retourValidation = false);
+            }
+            //Si il a bien été trouvé, on vérifie que l'autre attribut existe pas déjà
+            i = relationArite;  //Remise à 0 de l'itérateur
+            while (i-- && retourValidation) {
+                if (!strcmp(op.nouveau_nom_ren, relationAttr[i])) {
+                    retourValidation = false;
+                }
+            }
 
             break;
         default:

@@ -224,6 +224,14 @@ int main() {
     operateur = OPERATEUR_projection_creer(test, 1);
     printf("\nRésultat 3c : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
 
+    //Opérateur renomage :
+    printf("\nValidation Renomage : ");
+    operateur = OPERATEUR_renommage_creer(ancienNomTest, nouveauNomTest);
+    printf("\nRésultat 4a : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
+    printf("\nRésultat 4b : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+    printf("\nRésultat 4c : %s", (OPERATEUR_unaire_valider(operateur, (OPERATEUR_unaire_evaluer(operateur, vu))) ? "true" : "false"));
+
+
 
 
 
