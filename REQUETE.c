@@ -78,8 +78,8 @@ void REQUETE_verifeval(REQUETE req, RELATION *rel, bool *err) {
     if (!*err) {
         //Booléen qui stocke la validité de l'opérateur
         bool valideOp = false;
-        RELATION *relationTestG = NULL;
-        RELATION *relationTestD = NULL;
+        RELATION relationTestG;
+        RELATION relationTestD;
 
         //Existe-t-il un fils gauche ?
         if (req->g != NULL) {
@@ -87,16 +87,16 @@ void REQUETE_verifeval(REQUETE req, RELATION *rel, bool *err) {
             if (req->d != NULL) {
                 //Opérateur binaire
                 // Vérification récursive des sous parties la requête
-                REQUETE_verifeval(req->g, relationTestG, err);
+                REQUETE_verifeval(req->g, &relationTestG, err);
                 //Si la première sous-requête a renvoyé false, celle-ci ne sera pas évaluée
-                REQUETE_verifeval(req->d, relationTestD, err);
+                REQUETE_verifeval(req->d, &relationTestD, err);
                 //Si il n'y a toujours pas d'erreur
                 if (!*err) {
                     //On peut alors tester la validité de l'opérateur
-                    valideOp = OPERATEUR_binaire_valider(req->val, *(relationTestG), *(relationTestD));
+                    valideOp = OPERATEUR_binaire_valider(req->val, relationTestG, relationTestD);
                     if (valideOp) {
                         //Si l'opérateur est valide ont peut alors l'évaluer et mettre sa valeur dans rel
-                        *rel = OPERATEUR_binaire_evaluer(req->val, *(relationTestG), *(relationTestD));
+                        *rel = OPERATEUR_binaire_evaluer(req->val, relationTestG, relationTestD);
                     } else {
                         //Sinon la requête est fausse
                         *err = true;
@@ -105,13 +105,13 @@ void REQUETE_verifeval(REQUETE req, RELATION *rel, bool *err) {
             } else {
                 //Opérateur unaire
                 //Vérification récursive du fils gauche
-                REQUETE_verifeval(req->g, relationTestG, err);
+                REQUETE_verifeval(req->g, &relationTestG, err);
                 if (!*err) {
                     //Si la validation donne la sous-requête correcte, on valide l'opérateur
-                    valideOp = OPERATEUR_unaire_valider(req->val, *(relationTestG));
+                    valideOp = OPERATEUR_unaire_valider(req->val, relationTestG);
                     if (valideOp) {
                         //Si l'opérateur est valide ont peut alors l'évaluer et mettre sa valeur dans rel
-                        *rel = OPERATEUR_unaire_evaluer(req->val, *(relationTestG));
+                        *rel = OPERATEUR_unaire_evaluer(req->val, relationTestG);
                     } else {
                         //Sinon la requête est fausse
                         *err = true;

@@ -242,8 +242,13 @@ int main() {
     operateur = OPERATEUR_difference_creer();
     printf("\nRésultat 5d : %s", (OPERATEUR_binaire_valider(operateur, vu, aime) ? "true" : "false"));
 
+    /* TEST VALIDATION REQUETE */
+    printf("\nRequete Validation tests\n");
+    RELATION rel;
+    bool err = false;
+    REQUETE_verifeval(requete, &rel, &err);
 
-
+    RELATION_afficher(rel);
 
     return 0;
 }
