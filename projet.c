@@ -68,113 +68,126 @@ int main() {
     RELATION_afficher(vu);
 
     /* Mettre vos tests ci-dessous */
-    /* TEST OPERATEUR*/
-    OPERATEUR operateur;
-    printf("\nOperateur tests\n");
+    printf("***************TESTS***************");
 
-    //Operateur Relation
-    printf("\nOperateur RELATION : \n");
+    /* TEST OPÉRATEUR*/
+    OPERATEUR operateur;
+    printf("\nTests Opérateurs :\n");
+
+    //Opérateur Relation
+    printf("\nOpérateur RELATION : \n");
     operateur = OPERATEUR_relation_creer(film);
     OPERATEUR_afficher(operateur);
 
-    //Operateur Selection
-    printf("\nOperateur SELECTION : \n");
+    //Opérateur Selection
+    printf("\nOpérateur SELECTION : \n");
     char *selectionTest[] = {"", "Georges Lucas", ""};
     operateur = OPERATEUR_selection_creer(selectionTest, 3);
     OPERATEUR_afficher(operateur);
 
 
-    //Operateur Projection
-    printf("\nOperateur PROJECTION : \n");
+    //Opérateur Projection
+    printf("\nOpérateur PROJECTION : \n");
     char *projectionTests[] = {"Titre", "Acteur"};
     operateur = OPERATEUR_projection_creer(projectionTests, 2);
     OPERATEUR_afficher(operateur);
 
-    //Operateur Renomage
-    printf("\nOperateur RENOMAGE : \n");
+    //Opérateur Renomage
+    printf("\nOpérateur RENOMAGE : \n");
     char *ancienNomTest = "Spectateur";
     char *nouveauNomTest = "Client";
     operateur = OPERATEUR_renommage_creer(ancienNomTest, nouveauNomTest);
     OPERATEUR_afficher(operateur);
 
 
-    //Operateur Jointure
-    printf("\nOperateur JOINTURE : \n");
+    //Opérateur Jointure
+    printf("\nOpérateur JOINTURE : \n");
     operateur = OPERATEUR_jointure_creer();
     OPERATEUR_afficher(operateur);
 
-    //Operateur Union
-    printf("\nOperateur UNION : \n");
+    //Opérateur Union
+    printf("\nOpérateur UNION : \n");
     operateur = OPERATEUR_union_creer();
     OPERATEUR_afficher(operateur);
 
-    //Operateur Intersection
-    printf("\nOperateur INTERSECTION : \n");
+    //Opérateur Intersection
+    printf("\nOpérateur INTERSECTION : \n");
     operateur = OPERATEUR_intersection_creer();
     OPERATEUR_afficher(operateur);
 
-    //Operateur Difference
-    printf("\nOperateur DIFFERENCE : \n");
+    //Opérateur Difference
+    printf("\nOpérateur DIFFERENCE : \n");
     operateur = OPERATEUR_difference_creer();
     OPERATEUR_afficher(operateur);
-    printf("\n\nFin Operateurs test\n");
+    printf("\n\nFin des tests Opérateurs\n");
 
-    /* TEST EVALUATION */
-    printf("\nEvaluation tests\n");
+    /* TEST ÉVALUATION */
+    printf("\nTests Évaluation :\n");
 
-    //Evaluation OPERATEURS UNAIRES :
-    printf("\nEvaluation Operateur RELATION : \n");
+    //Évaluation OPÉRATEURS UNAIRES :
+
+    //Opérateur relation
+    printf("\nÉvaluation Opérateur RELATION : \n");
     operateur = OPERATEUR_relation_creer(film);
     OPERATEUR_afficher(operateur);
     printf("\n");
     RELATION_afficher(OPERATEUR_relation_evaluer(operateur));
 
-    printf("\nEvaluation Operateur SELECTION : \n");
+    //Opérateur sélection
+    printf("\nÉvaluation Opérateur SELECTION : \n");
     operateur = OPERATEUR_selection_creer(selectionTest, 3);
     OPERATEUR_afficher(operateur);
     printf("\n");
     RELATION_afficher(OPERATEUR_unaire_evaluer(operateur, film));
 
-    printf("\nEvaluation Operateur PROJECTION : \n");
+    //Opérateur projection
+    printf("\nÉvaluation Operateur PROJECTION : \n");
     operateur = OPERATEUR_projection_creer(projectionTests, 2);
     OPERATEUR_afficher(operateur);
     printf("\n");
     RELATION_afficher(OPERATEUR_unaire_evaluer(operateur, film));
 
-    printf("\nEvaluation Operateur RENOMMAGE : \n");
+    //Opérateur renomage
+    printf("\nÉvaluation Operateur RENOMMAGE : \n");
     operateur = OPERATEUR_renommage_creer(ancienNomTest, nouveauNomTest);
     OPERATEUR_afficher(operateur);
     printf("\n");
     RELATION_afficher(OPERATEUR_unaire_evaluer(operateur, aime));
 
-    //Evaluation OPERATEURS BINAIRES :
-    printf("\nEvaluation Operateur JOINTURE : \n");
+    //Évaluation OPÉRATEURS BINAIRES :
+
+    //Opérateur jointure
+    printf("\nÉvaluation Opérateur JOINTURE : \n");
     operateur = OPERATEUR_jointure_creer();
     OPERATEUR_afficher(operateur);
     printf("\n");
     RELATION_afficher(OPERATEUR_binaire_evaluer(operateur, film, vu));
 
-    printf("\nEvaluation Operateur UNION : \n");
+    //Opérateur union
+    printf("\nÉvaluation Opérateur UNION : \n");
     operateur = OPERATEUR_union_creer();
     OPERATEUR_afficher(operateur);
     printf("\n");
     RELATION_afficher(OPERATEUR_binaire_evaluer(operateur, vu, film));
 
-    printf("\nEvaluation Operateur INTERSECTION : \n");
+    //Opérateur intersection
+    printf("\nÉvaluation Opérateur INTERSECTION : \n");
     operateur = OPERATEUR_intersection_creer();
     OPERATEUR_afficher(operateur);
     printf("\n");
     RELATION_afficher(OPERATEUR_binaire_evaluer(operateur, vu, film));
 
-    printf("\nEvaluation Operateur DIFFERENCE : \n");
+    //Opérateur différence
+    printf("\nÉvaluation Opérateur DIFFERENCE : \n");
     operateur = OPERATEUR_difference_creer();
     OPERATEUR_afficher(operateur);
     printf("\n");
     RELATION_afficher(OPERATEUR_binaire_evaluer(operateur, vu, aime));
-    printf("\n\nFin Evaluation test\n");
+
+    printf("\n\nFin des tests d'Évaluation\n");
 
     /* TEST REQUETE */
-    printf("\nRequete tests\n");
+    printf("\nTests Requête :\n");
 
     //Creation d'une requête
     //Création des opérateurs :
@@ -196,59 +209,138 @@ int main() {
     printf("\nÉvaluation : \n");
     RELATION_afficher(REQUETE_evaluer(requete));
 
-    printf("\n");
+    printf("\n\nFin des tests de requête\n");
 
     /* TEST VALIDATION */
-    printf("\nValidation tests");
+    printf("\nTests validation :");
 
     //Opérateur relation :
-    printf("\nValidation Relation : ");
+    printf("\n\nValidation Relation : ");
     operateur = OPERATEUR_relation_creer(film);
-    printf("\nRésultat 1 : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+    printf("\n\n");
+    OPERATEUR_afficher(operateur);
+    printf("\nRésultat 1 (film) (Attendu : false) : %s",
+           (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
 
     //Opérateur sélection :
-    printf("\nValidation Sélection : ");
+    printf("\n\nValidation Sélection : ");
     operateur = OPERATEUR_selection_creer(selectionTest, 3);
-    printf("\nRésultat 2a : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+    printf("\n\n");
+    OPERATEUR_afficher(operateur);
+    printf("\nRésultat 2a (film) (Attendu : true) : %s",
+           (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
     operateur = OPERATEUR_selection_creer(selectionReqTests, 4);
-    printf("\nRésultat 2b : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+    printf("\n\n");
+    OPERATEUR_afficher(operateur);
+    printf("\nRésultat 2b (film) (Attendu : false) : %s",
+           (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
 
     //Opérateur projection :
-    printf("\nValidation Projection : ");
+    printf("\n\nValidation Projection : ");
     //projectionTests : Titre, Acteur
     operateur = OPERATEUR_projection_creer(projectionTests, 2);
-    printf("\nRésultat 3a : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
-    printf("\nRésultat 3b : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
-    printf("\nRésultat 3c : %s", (OPERATEUR_unaire_valider(operateur, aime) ? "true" : "false"));
+    printf("\n\n");
+    OPERATEUR_afficher(operateur);
+    printf("\nRésultat 3a (film) (Attendu : true) : %s",
+           (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+    printf("\nRésultat 3b (vu) (Attendu : false) : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
+    printf("\nRésultat 3c (aime) (Attendu : false) : %s",
+           (OPERATEUR_unaire_valider(operateur, aime) ? "true" : "false"));
     char *test[] = {"Spectateur"};
     operateur = OPERATEUR_projection_creer(test, 1);
-    printf("\nRésultat 3c : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
+    printf("\n\n");
+    OPERATEUR_afficher(operateur);
+    printf("\nRésultat 3d (vu) (Attendu : true) : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
 
     //Opérateur renomage :
-    printf("\nValidation Renomage : ");
+    printf("\n\nValidation Renomage : ");
     operateur = OPERATEUR_renommage_creer(ancienNomTest, nouveauNomTest);
-    printf("\nRésultat 4a : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
-    printf("\nRésultat 4b : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
-    printf("\nRésultat 4c : %s",
+    printf("\n\n");
+    OPERATEUR_afficher(operateur);
+    printf("\nRésultat 4a (vu) (Attendu : true) : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
+    printf("\nRésultat 4b (film) (Attendu : false) : %s",
+           (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+    //Évaluation sur le renomage de vu -> déjà présent
+    printf("\nRésultat 4c (RENOMAGE(vu)) (Attendu : false) : %s",
            (OPERATEUR_unaire_valider(operateur, (OPERATEUR_unaire_evaluer(operateur, vu))) ? "true" : "false"));
 
     //Opérateurs binaires
-    printf("\nValidation Opérateurs binaires : ");
+    printf("\n\nValidation Opérateurs binaires : ");
     operateur = OPERATEUR_union_creer();
-    printf("\nRésultat 5a : %s", (OPERATEUR_binaire_valider(operateur, vu, aime) ? "true" : "false"));
-    printf("\nRésultat 5b : %s", (OPERATEUR_binaire_valider(operateur, film, vu) ? "true" : "false"));
+    printf("\n\n");
+    OPERATEUR_afficher(operateur);
+    printf("\nRésultat 5a (vu,aime) (Attendu : true) : %s",
+           (OPERATEUR_binaire_valider(operateur, vu, aime) ? "true" : "false"));
+    printf("\nRésultat 5b (film,vu) (Attendu : false) : %s",
+           (OPERATEUR_binaire_valider(operateur, film, vu) ? "true" : "false"));
     operateur = OPERATEUR_intersection_creer();
-    printf("\nRésultat 5c : %s", (OPERATEUR_binaire_valider(operateur, vu, aime) ? "true" : "false"));
+    printf("\n\n");
+    OPERATEUR_afficher(operateur);
+    printf("\nRésultat 5c (vu,aime) (Attendu : true) : %s",
+           (OPERATEUR_binaire_valider(operateur, vu, aime) ? "true" : "false"));
     operateur = OPERATEUR_difference_creer();
-    printf("\nRésultat 5d : %s", (OPERATEUR_binaire_valider(operateur, vu, aime) ? "true" : "false"));
+    printf("\n\n");
+    OPERATEUR_afficher(operateur);
+    printf("\nRésultat 5d (vu,aime) (Attendu : true) : %s",
+           (OPERATEUR_binaire_valider(operateur, vu, aime) ? "true" : "false"));
+    printf("\n\nFin des tests de validation");
 
     /* TEST VALIDATION REQUETE */
-    printf("\nRequete Validation tests\n");
+    printf("\n\nTests validation requête : \n");
+
     RELATION rel;
     bool err = false;
+    printf("\n");
+    REQUETE_afficher(requete);
+
     REQUETE_verifeval(requete, &rel, &err);
 
+    printf("\n");
+    printf("\nRésultat 1 (Attendu : false) : %s", err ? "true" : "false");
+    printf("\n");
     RELATION_afficher(rel);
 
+    //Création de requêtes incorrectes
+    char * selectionReqFaux[] = {"", "Georges Lucas", "", "", ""};
+    OPERATEUR opSelFaux = OPERATEUR_selection_creer(selectionReqFaux, 5);
+
+    REQUETE requeteFausse = REQUETE_creer(opProjection,
+                                          REQUETE_creer(opSelection, NULL,
+                                                        REQUETE_creer(opJointure,
+                                                                      REQUETE_creer(opFilm, NULL, NULL),
+                                                                      REQUETE_creer(opVu, NULL, NULL)
+                                                        )
+                                          ), NULL);
+
+    printf("\n");
+    REQUETE_afficher(requeteFausse);
+    REQUETE_verifeval(requeteFausse, &rel, &err);
+    printf("\nRésultat 2 (Attendu : true) : %s", err ? "true" : "false");
+
+    requeteFausse = REQUETE_creer(opSelection,
+                                  REQUETE_creer(opProjection, NULL,
+                                                REQUETE_creer(opJointure,
+                                                              REQUETE_creer(opFilm, NULL, NULL),
+                                                              REQUETE_creer(opVu, NULL, NULL)
+                                                )
+                                  ), NULL);
+    printf("\n");
+    REQUETE_afficher(requeteFausse);
+    REQUETE_verifeval(requeteFausse, &rel, &err);
+    printf("\nRésultat 3 (Attendu : true) : %s", err ? "true" : "false");
+
+    requeteFausse = REQUETE_creer(opProjection,
+                                  REQUETE_creer(opSelFaux,
+                                                REQUETE_creer(opJointure,
+                                                              REQUETE_creer(opFilm, NULL, NULL),
+                                                              REQUETE_creer(opVu, NULL, NULL)
+                                                ), NULL),
+                                  NULL);
+    printf("\n");
+    REQUETE_afficher(requeteFausse);
+    REQUETE_verifeval(requeteFausse, &rel, &err);
+    printf("\nRésultat 4 (Attendu : true) : %s", err ? "true" : "false");
+
+    printf("\n\nFin des Tests\n\n");
     return 0;
 }
