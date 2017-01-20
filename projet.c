@@ -99,9 +99,9 @@ int main() {
     operateur = OPERATEUR_renommage_creer(ancienNomTest, nouveauNomTest);
     OPERATEUR_afficher(operateur);
 
-
     //Opérateur Jointure
     printf("\nOpérateur JOINTURE : \n");
+
     operateur = OPERATEUR_jointure_creer();
     OPERATEUR_afficher(operateur);
 
@@ -342,5 +342,6 @@ int main() {
     printf("\nRésultat 4 (Attendu : true) : %s", err ? "true" : "false");
 
     printf("\n\nFin des Tests\n\n");
+
     return 0;
 }
