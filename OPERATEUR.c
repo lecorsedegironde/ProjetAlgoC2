@@ -11,6 +11,11 @@
 //=======================================================================================
 
 /*
+ * Création des opérateurs unaires avec leur champs significatifs contenus dans la structure OPERATEUR.
+ *
+ */
+
+/*
  * Module OPERATEUR_relation_creer
  * Paramètre :
  *      RELATION rel - Champ significatif pour une relation (noeud feuille)
@@ -96,6 +101,11 @@ OPERATEUR OPERATEUR_renommage_creer(char *ancienNom, char *nvNom) {
 //=======================================================================================
 
 /*
+ * Création des opérateurs binaires dont on remplit uniquement le champ op.
+ *
+ */
+
+/*
  * Module OPERATEUR_jointure_creer
  * Retourne : OPERATEUR
  * Structure :
@@ -161,6 +171,8 @@ OPERATEUR OPERATEUR_difference_creer() {
  *      OPERATEUR op - Opérateur a afficher
  * Retourne : void
  *
+ * Affichage de l'opérateur et du contenu de ses champs significatifs si nécessaire selon une syntaxe définie.
+ *
  */
 void OPERATEUR_afficher(OPERATEUR op) {
     int i = 0;
@@ -204,11 +216,18 @@ void OPERATEUR_afficher(OPERATEUR op) {
     }
 }
 
+
+//=======================================================================================
+//OPÉRATIONS SUR OPERATEUR
+//=======================================================================================
+
 /*
  * Module OPERATEUR_type
  * Paramètre :
  *      OPERATEUR op - Opérateur dont le titre est à afficher
  * Retourne : OPERATEUR_RELATIONNEL
+ *
+ * Retourne le type de l'opérateur.
  *
  */
 OPERATEUR_RELATIONNEL OPERATEUR_type(OPERATEUR op) {
@@ -220,6 +239,8 @@ OPERATEUR_RELATIONNEL OPERATEUR_type(OPERATEUR op) {
  * Paramètre :
  *      OPERATEUR op : Opérateur de relation qui est à évaluer
  * Retourne : RELATION
+ *
+ * Évaluation de l'opérateur de relation qui retourne celle-ci.
  *
  */
 RELATION OPERATEUR_relation_evaluer(OPERATEUR op) {
@@ -234,8 +255,13 @@ RELATION OPERATEUR_relation_evaluer(OPERATEUR op) {
  *      RELATION rel : Relation sur laquelle on applique l'opérateur
  * Retourne : RELATION
  *
+ * Cette fonction évalue les opérateurs sans se soucier de leur validité et retourne la relation résultante ou une
+ * relation vide si ce n'est pas un opérateur unaire.
+ *
  */
 RELATION OPERATEUR_unaire_evaluer(OPERATEUR op, RELATION rel) {
+    //Relation vide en cas de mauvais opérateur
+    RELATION r;
     switch (op.op) {
         case op_selection:
             return RELATION_SELECTION(rel, op.val_sel);
@@ -244,9 +270,8 @@ RELATION OPERATEUR_unaire_evaluer(OPERATEUR op, RELATION rel) {
         case op_renommage:
             return RELATION_RENOMMAGE(rel, op.ancien_nom_ren, op.nouveau_nom_ren);
         default:
-            //Temporary workaround to avoid compilation warning
-            //TODO: Change when needed
-            return rel;
+            //Si l'opérateur n'est pas un des opérateurs unaires à évaluer on retourne une relation vide
+            return r;
     }
 }
 
@@ -258,10 +283,13 @@ RELATION OPERATEUR_unaire_evaluer(OPERATEUR op, RELATION rel) {
  *      RELATION rel1, rel2 : Relations sur lesquelles on applique l'opérateur
  * Retourne : RELATION
  *
+ * Cette fonction évalue les opérateurs sans se soucier de leur validité et retourne la relation résultante ou une
+ * relation vide si ce n'est pas un opérateur binaire.
  */
 RELATION OPERATEUR_binaire_evaluer(OPERATEUR op, RELATION rel1, RELATION rel2) {
+    //Relation vide en cas de mauvais opérateur
+    RELATION r;
     switch (op.op) {
-
         case op_jointure:
             return RELATION_JOINTURE(rel1, rel2);
         case op_union:
@@ -271,9 +299,8 @@ RELATION OPERATEUR_binaire_evaluer(OPERATEUR op, RELATION rel1, RELATION rel2) {
         case op_difference:
             return RELATION_DIFFERENCE(rel1, rel2);
         default:
-            //Temporary workaround to avoid compilation warning
-            //TODO: Change when needed
-            return rel1;
+            //Si l'opérateur n'est pas un des opérateurs unaires à évaluer on retourne une relation vide
+            return r;
     }
 }
 
@@ -283,6 +310,8 @@ RELATION OPERATEUR_binaire_evaluer(OPERATEUR op, RELATION rel1, RELATION rel2) {
  *      OPERATEUR op : Opéarateur unaire à valider
  *      RELATION rel : La relation sur laquelle l'opérateur est censé s'appliquer
  * Retourne : bool
+ *
+ * Validation d'un opérateur unaire, on estime que celui-ci est vrai et on essaye de le démontrer.
  *
  */
 bool OPERATEUR_unaire_valider(OPERATEUR op, RELATION rel) {
@@ -370,10 +399,13 @@ bool OPERATEUR_unaire_valider(OPERATEUR op, RELATION rel) {
  *      RELATION rel1, rel2 : Les relations sur lesquelle l'opérateur est censé s'appliquer
  * Retourne : bool
  *
+ * Validation d'un opérateur binaire, on estime que celui-ci est vrai et on essaye de le démontrer.
+ *
  */
 bool OPERATEUR_binaire_valider(OPERATEUR op, RELATION rel1, RELATION rel2) {
     //les relations dont on veut l'union, l'intersection ou la difference doivent etre de meme schema
     //Booleen de retour, ici aussi on part du postulat que l'opérateur est vrai
+    //Si jointure on ne fait rien et renvoie vrai
     bool retourValidation = true;
     if (op.op == op_union || op.op == op_intersection || op.op == op_difference) {
 
@@ -391,7 +423,7 @@ bool OPERATEUR_binaire_valider(OPERATEUR op, RELATION rel1, RELATION rel2) {
             retourValidation = false;
         }
     } else if (op.op != op_jointure) {
-        retourValidation = false;    //Opérateur unaire ou jointure
+        retourValidation = false;    //Opérateur unaire
     }
 
     return retourValidation;
