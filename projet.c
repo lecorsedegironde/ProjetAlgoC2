@@ -97,6 +97,7 @@ int main() {
     operateur = OPERATEUR_renommage_creer(ancienNomTest, nouveauNomTest);
     OPERATEUR_afficher(operateur);
 
+
     //Operateur Jointure
     printf("\nOperateur JOINTURE : \n");
     operateur = OPERATEUR_jointure_creer();
@@ -196,6 +197,58 @@ int main() {
     RELATION_afficher(REQUETE_evaluer(requete));
 
     printf("\n");
+
+    /* TEST VALIDATION */
+    printf("\nValidation tests");
+
+    //Opérateur relation :
+    printf("\nValidation Relation : ");
+    operateur = OPERATEUR_relation_creer(film);
+    printf("\nRésultat 1 : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+
+    //Opérateur sélection :
+    printf("\nValidation Sélection : ");
+    operateur = OPERATEUR_selection_creer(selectionTest, 3);
+    printf("\nRésultat 2a : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+    operateur = OPERATEUR_selection_creer(selectionReqTests, 4);
+    printf("\nRésultat 2b : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+
+    //Opérateur projection :
+    printf("\nValidation Projection : ");
+    //projectionTests : Titre, Acteur
+    operateur = OPERATEUR_projection_creer(projectionTests, 2);
+    printf("\nRésultat 3a : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+    printf("\nRésultat 3b : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
+    printf("\nRésultat 3c : %s", (OPERATEUR_unaire_valider(operateur, aime) ? "true" : "false"));
+    char *test[] = {"Spectateur"};
+    operateur = OPERATEUR_projection_creer(test, 1);
+    printf("\nRésultat 3c : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
+
+    //Opérateur renomage :
+    printf("\nValidation Renomage : ");
+    operateur = OPERATEUR_renommage_creer(ancienNomTest, nouveauNomTest);
+    printf("\nRésultat 4a : %s", (OPERATEUR_unaire_valider(operateur, vu) ? "true" : "false"));
+    printf("\nRésultat 4b : %s", (OPERATEUR_unaire_valider(operateur, film) ? "true" : "false"));
+    printf("\nRésultat 4c : %s",
+           (OPERATEUR_unaire_valider(operateur, (OPERATEUR_unaire_evaluer(operateur, vu))) ? "true" : "false"));
+
+    //Opérateurs binaires
+    printf("\nValidation Opérateurs binaires : ");
+    operateur = OPERATEUR_union_creer();
+    printf("\nRésultat 5a : %s", (OPERATEUR_binaire_valider(operateur, vu, aime) ? "true" : "false"));
+    printf("\nRésultat 5b : %s", (OPERATEUR_binaire_valider(operateur, film, vu) ? "true" : "false"));
+    operateur = OPERATEUR_intersection_creer();
+    printf("\nRésultat 5c : %s", (OPERATEUR_binaire_valider(operateur, vu, aime) ? "true" : "false"));
+    operateur = OPERATEUR_difference_creer();
+    printf("\nRésultat 5d : %s", (OPERATEUR_binaire_valider(operateur, vu, aime) ? "true" : "false"));
+
+    /* TEST VALIDATION REQUETE */
+    printf("\nRequete Validation tests\n");
+    RELATION rel;
+    bool err = false;
+    REQUETE_verifeval(requete, &rel, &err);
+
+    RELATION_afficher(rel);
 
     return 0;
 }

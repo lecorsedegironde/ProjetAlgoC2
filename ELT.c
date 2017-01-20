@@ -8,6 +8,9 @@
  * Paramètres :
  *      ELT elt : Élément d'abstraction qui est un opérateur
  * Retourne : void
+ *
+ * ELT étant un opérateur, affiche l'opérateur
+ *
  */
 void ELT_afficher(ELT elt) {
     OPERATEUR_afficher(elt);
